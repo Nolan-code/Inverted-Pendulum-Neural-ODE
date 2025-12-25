@@ -2,8 +2,8 @@
 # Load data
 #-------------
 
-data = np.load("2.1_HNN.npz")
-split = np.load("2.2_HNN.npz")
+data = np.load("pendulum_no_control_dataset.npz.npz")
+split = np.load("splits_no_control.npz")
 
 X = np.hstack(data["X"])
 X = data["X"].reshape(10000, 2)
