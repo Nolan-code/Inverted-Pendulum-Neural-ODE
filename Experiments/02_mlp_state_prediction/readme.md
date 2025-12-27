@@ -1,4 +1,3 @@
-## Results of the MLP
 ### First model
 In this first experiment, the MLP directly predicts the next state of the system given the current state and the applied control force \( u \).
 
