@@ -5,6 +5,8 @@ the training set and test set. Moreover a new loss was introduced to try to forc
 
 #### Trajectory
 - The neural network, despite despite failing to learn that the stable equilibrium point is at pi, managed to build physicly correct trajectories. In fact, it is able to get the correct amplitude and period of the oscillations.
+![Trajectory](figures/HNN_v1.png)
+
 
 #### Phase portrait
 - The neural network is now able to build close shaped phase portrait when the system does not have the required amount of energy to do a full revolution.
