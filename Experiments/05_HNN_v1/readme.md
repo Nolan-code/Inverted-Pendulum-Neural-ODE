@@ -11,6 +11,8 @@ The dataset was constructed such that approximately 1/50 of the samples correspo
 #### Phase portrait
 - The neural network is now able to generate closed phase space trajectories when the system does not have sufficent energy to do a full rotation, which is consistent with the expected behavior of the pendulum.
 
+![Trajectory](figures/HNN_phase_v1.png)
+
 #### Analysis
 - Despite explicitly penalizing incorrect equilibrium positionning throught a new loss term, the neural network is consistently positionning the equilibrium point at θ=0 instead of θ=π.
 - This behavior clearly shows an identifiable issue: while the learned Hamiltonian produces correct dynamics, the position of the equilibrium point is not uniquely determined by the equations of motion alone.
