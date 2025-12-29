@@ -11,4 +11,12 @@ The neural network learns a scalar-valued Hamiltonian H(x), from which the time 
 - The learned Hamiltonian is defined up to a symmetry in the angular coordinate. While the model reproduces the correct dynamics, the absolute position of the stable equilibrium is not identifiable from data alone.
 
 #### Conclusion
-- The Hamiltonian learned is defined to within one symmetry; the origin of the potential cannot be identified from the trajectories.
+This final HNN experiment demonstrates that:
+- Hamiltonian Neural Networks can successfully learn locally accurate conservative dynamics
+- However, without additional global constraints, they may fail to recover:
+- The correct energy landscape
+- The true location of stable equilibrium point
+These limitations motivate the transition to another model,a Langrangian neural network where:
+- The potential energy is directly learned
+- Stable equilibria correspond to minima of a learned scalar function
+- The physical structure of the system is more strongly constrained
