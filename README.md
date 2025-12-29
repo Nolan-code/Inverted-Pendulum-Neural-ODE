@@ -20,6 +20,14 @@ I progressively increased the amount of physical constraints imposed by the mode
 - Physics informed models enforce global strucure and also help to diagnose inconsistencies in the training data.
 - Correct physically modeling requires both well-structured models with physical constraints and physically consistent data.
 
+## Impact of dataset correction
+During the training of the physics-informed models, inconsistencies were identified in the original dataset, notably in the sign and qualitative behavior of the angular acceleration.
+After correcting the dataset, earlier models (MLP-based predictors and HNN) were retrained for comparison.
+
+While the quantitative performance of the MLP improved, this model still failed to consistently reproduce the correct physical structure and long-term dynamics. In contrast, physics-informed models (HNN and LNN) exhibited a clear sensitivity to data consistency and benefited significantly from the corrected dataset.
+
+This highlights an important distinction: purely data-driven models may fit inconsistent data without exposing underlying physical errors, whereas physics-informed architectures can clearly exhibit physical inconsistencies in the training dataset.
+
 ## Lessons learned
 This project highlights that physics informed models are not only a predictive tool but also a good way of diagnosing physical inconstitencies in the training data. In particular, the Hamiltonian model exhibits signs of physical data inconstitencies that weren't detected by standard neural networks.
 
