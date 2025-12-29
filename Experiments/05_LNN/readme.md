@@ -1,4 +1,4 @@
-### Lagrangian Neural Network (LNN)
+### Forth model(LNN)
 While Hamiltonian neural networks successfully conserved the energy of the system, it still seems to lack physical constraints to place the stable equilibrium point of the pendulum accurately. That's why I am now switching to a Lagrangian neural network to add more physical constraints. The goal of the LNN is to compute L = T(ω) - V(θ) and then recover the state derivatives using Lagrange equations.
 
 #### Lagrangian formulation
