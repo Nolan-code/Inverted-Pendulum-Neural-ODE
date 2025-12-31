@@ -1,11 +1,27 @@
 # Inverted-Pendulum-Neural-ODE
-This project investigates the learning of nonlinear physical dynamics using neural networks, with the inverted pendulum as a benchmark system. The goal is to compare different learning strategies—from unconstrained neural networks to physics-informed architectures and analyze their ability to reproduce the qualitative and quantitative properties of a conservative dynamical system.
+This project investigates the learning of nonlinear physical dynamics using neural networks, with the inverted pendulum as a benchmark system.   
+The goal is to compare purely data-driven models to physics informed architectures and to analyze their ability to reproduce both the quantitative accuracy and qualitative physical structure of a conservative dynamical system.
 
 ## Physical system
-We considered a planar pendulum governed by a non-linear dynamics. The system is conservative and admits a Hamiltonian formulation, making it ideal for physical informed learning. The state is given by x = (θ, ω) with θ the angle and ω the angular velocity.
+We considered a planar pendulum governed by a non-linear second order ordinary differential equation. The system is conservative and admits a Hamiltonian formulation, making it suitable for physical informed learning.   
+- The state is given by x = (θ, ω)   
+where :  
+- θ the angle
+- ω the angular velocity
+
+The dynamics can be written as:   
+      θ˙ = ω,  ω˙ = (g/l) * ​sin(θ)
+
+The Hamiltonian of the system is given by:  
+   H(θ,ω) = (1/2) * ​ω2 + (g/l) * (1 − cosθ)
 
 ## Numerical baseline
-Before any learning stage, the dynamics are generated using the RK4 step approximation method (4th order). The energy conservation and the phase-space structure are verified to ensure physically consistent trajectories.
+Before any learning stage, references trajectories are generated using a forth order Runge–Kutta (RK4) integration scheme.   
+The numerical solver is validated by checking :
+- the energy conservation
+- phase-space structure
+- long term qualitative behavior    
+This ensure that the training data is physically consistent.
 
 ## Learning approach
 I progressively increased the amount of physical constraints imposed by the model:
