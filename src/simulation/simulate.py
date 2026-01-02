@@ -8,6 +8,12 @@ from src.needed_functions.lnn import *
 from src.needed_functions.vector_field_mlp import *
 from Common.needed_fn import *
 
+def build_model(model_name):
+    try:
+        return MODEL_REGISTRY[model_name]()
+    except KeyError:
+        raise ValueError(f"Unknown model type: {model_name}")
+
 MODEL_REGISTRY = {
     "mlp": VectorFieldMLP,
     "hnn": HNN,
@@ -41,6 +47,7 @@ params = {
     "m": 1.0     # mass (kg)
 }
 
+model = build_model(args.model)
 simulation_fn = SIMULATE_REGISTRY[args.model]
 T = args.duration
 dt = 0.01
