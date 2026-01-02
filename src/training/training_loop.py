@@ -21,6 +21,7 @@ def build_model(model_name):
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, required=True, help='Model type: mlp, hnn, or lnn')
+parser.add_argument('--epochs', type=int, default=250, help='Number of training epochs')  
 args = parser.parse_args()
 
 #---------
@@ -36,7 +37,7 @@ loss_fn = nn.MSELoss()
 #----------------
 
 train_loader, test_loader = load_pendulum(model_type=args.model)
-n_epochs = 250
+n_epochs = args.epochs
 
 for epoch in range(n_epochs):
   model.train()
