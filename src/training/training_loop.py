@@ -89,5 +89,9 @@ checkpoint_dir = Path("./src/checkpoints")
 checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
 checkpoint_path = checkpoint_dir / f"{args.model}.pth"
-torch.save(model.state_dict(), checkpoint_path)
+torch.save({
+    "model": args.model,          
+    "state_dict": model.state_dict(),
+    }, checkpoint_path)
+
 print(f"Model saved to {checkpoint_path}")
