@@ -1,12 +1,27 @@
 import torch
 import torch.nn as nn
+import argparse
+
 from src.data.load_dataset import load_pendulum
+from .mlp_vectorfield import VectorFieldMLP
+from src.model.hnn import HNN
+from src.model.lnn import LNN
+
+MODEL_REGISTRY = {
+    "mlp": VectorFieldMLP,
+    "hnn": HNN,
+    "lnn": LNN,
+}
 
 def build_model(model_name):
     try:
         return MODEL_REGISTRY[model_name]()
     except KeyError:
         raise ValueError(f"Unknown model type: {model_name}")
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--model', type=str, required=True, help='Model type: mlp, hnn, or lnn')
+args = parser.parse_args()
 
 #---------
 #  Model
@@ -20,7 +35,7 @@ loss_fn = nn.MSELoss()
 # Training loop
 #----------------
 
-train_loader, test_loader = load_pendulum(model_type=model)
+train_loader, test_loader = load_pendulum(model_type=args.model)
 n_epochs = 250
 
 for epoch in range(n_epochs):
@@ -68,4 +83,4 @@ for epoch in range(n_epochs):
 # Save model
 #-------------
 
-torch.save(model.state_dict(), "HNN.pth")
+torch.save(model.state_dict(),  f"{args.model}_model.pth")
