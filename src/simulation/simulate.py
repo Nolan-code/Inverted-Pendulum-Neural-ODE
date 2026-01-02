@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import numpy as np
 
-from src.needed_functions.hnn_fn import *
+"""from src.needed_functions.hnn_fn import *
 from src.needed_functions.lnn import *
-from src.needed_functions.vector_field_mlp import *
+from src.needed_functions.vector_field_mlp import *"""
 from Common.needed_fn import *
 
 def build_model(model_name):
@@ -20,11 +20,11 @@ MODEL_REGISTRY = {
     "lnn": LNN,
 }
 
-SIMULATE_REGISTRY = {
+"""SIMULATE_REGISTRY = {
     "hnn": trajectory_simulation_HNN,
     "lnn": simulate_lnn,
     "mlp": simulate_mlp,
-}
+}"""
 
 parser = argparse.ArgumentParser()
 
@@ -49,10 +49,13 @@ params = {
 }
 
 model = build_model(args.model)
-simulation_fn = SIMULATE_REGISTRY[args.model]
 T = args.duration
 dt = args.step
 x0 = args.initial_conditions
+if args.model in ["lnn","hnn"]:
+    format = "sincos"
+else:
+    format = "theta"
 
 t = np.arange(start=0, stop = T + dt, step = dt)
 
@@ -60,7 +63,7 @@ t = np.arange(start=0, stop = T + dt, step = dt)
 # Trajectories
 #--------------
 
-model_trajectory = simulation_fn(x0, dt, T)
+model_trajectory = simulate(x0, dt, T, format)
 
 true_trajectory = trajectory_simulation(x0, zero_control, dt, T, params=params)
 
