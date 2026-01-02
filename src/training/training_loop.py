@@ -4,8 +4,8 @@ import argparse
 
 from src.data.load_dataset import load_pendulum
 from .mlp_vectorfield import VectorFieldMLP
-from src.model.hnn import HNN
-from src.model.lnn import LNN
+from src.models.hnn import HNN
+from src.models.lnn import LNN
 
 MODEL_REGISTRY = {
     "mlp": VectorFieldMLP,
