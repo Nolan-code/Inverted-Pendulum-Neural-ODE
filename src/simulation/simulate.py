@@ -2,6 +2,7 @@ import argparse
 import matplotlib.pyplot as plt
 from pathlib import Path
 import numpy as np
+import torch
 
 from src.physics.model_simulation import *
 from src.physics.true_simulation import *
@@ -42,6 +43,10 @@ params = {
 }
 
 model = build_model(args.model)
+ckpt = torch.load(args.checkpoint, map_location="cpu")
+model.load_state_dict(ckpt)
+model.eval()
+
 T = args.duration
 dt = args.step
 x0 = args.initial_conditions
@@ -56,7 +61,7 @@ t = np.arange(start=0, stop = T + dt, step = dt)
 # Trajectories
 #--------------
 
-model_trajectory = simulate(x0, dt, T, format)
+model_trajectory = simulate(model, x0, dt, T, format=format)
 
 true_trajectory = trajectory_simulation(x0, zero_control, dt, T, params=params)
 
@@ -76,7 +81,7 @@ plt.ylabel("Theta (rad)")
 plt.legend([f'{args.model}', "True"])
 traj_path = output_dir / "trajectory.png"
 plt.savefig(traj_path, dpi=300, bbox_inches='tight')
-print(f"Plot saved to {phase_path}")
+print(f"Plot saved to {traj_path}")
 if args.show:
     plt.show()
 else:
@@ -91,7 +96,7 @@ plt.xlabel("Theta (rad)")
 plt.ylabel("Omega (rad/s)")
 phase_path = output_dir / "phase_portrait.png"
 plt.savefig(phase_path, dpi=300, bbox_inches='tight')
-print(f"Plot saved to {traj_path}")
+print(f"Plot saved to {phase_path}")
 if args.show:
     plt.show()
 else:
