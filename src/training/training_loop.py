@@ -1,3 +1,7 @@
+import torch
+import torch.nn as nn
+from src.data.load_dataset import load_pendulum
+
 def build_model(model_name):
     try:
         return MODEL_REGISTRY[model_name]()
@@ -16,7 +20,7 @@ loss_fn = nn.MSELoss()
 # Training loop
 #----------------
 
-train_loader, test_loader = load_pendulum(model_type="trig")
+train_loader, test_loader = load_pendulum(model_type=model)
 n_epochs = 250
 
 for epoch in range(n_epochs):
