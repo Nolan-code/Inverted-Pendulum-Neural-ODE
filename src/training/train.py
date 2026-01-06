@@ -26,6 +26,16 @@ parser.add_argument('--epochs', type=int, default=250, help='Number of training 
 parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate')
 args = parser.parse_args()
 
+import torch
+import numpy as np
+import random
+
+def set_seed(seed=0):
+    torch.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+
+set_seed(0)
 #---------
 #  Model
 #---------
