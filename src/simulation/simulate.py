@@ -8,27 +8,11 @@ from src.physics.model_simulation import *
 from src.physics.true_simulation import *
 
 
-def build_model(model_name, input_dim):
-    if model_name not in MODEL_REGISTRY:
+def build_model(model_name): 
+    try: 
+        return MODEL_REGISTRY[model_name]()
+    except KeyError: 
         raise ValueError(f"Unknown model type: {model_name}")
-
-    model_class = MODEL_REGISTRY[model_name]
-    try:
-        model = model_class(input_dim=input_dim)
-        print(f"Model {model_name} created with input_dim={input_dim}")
-        return model
-    except TypeError as e:
-        print(f"Warning: {model_name} doesn't accept input_dim parameter, using default constructor")
-        print(f"Error details: {e}")
-        return model_class()
-
-def get_input_dim(format):
-    if format == "theta":
-        return 2
-    if format == "sincos":
-        return 3
-    else:
-        raise ValueError(f"Format inconnu: {format_type}")
 
 MODEL_REGISTRY = {
     "mlp": MLP,
@@ -40,7 +24,6 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument('--model', type=str, required=True, help='Model type: mlp, hnn, or lnn')
 parser.add_argument('--checkpoint', type=str, required=True, help='Path to model checkpoint (e.g., hnn_model.pth)')
-parser.add_argument('--format', type=str, choices=['theta', 'sincos'], default='theta', help='Input format: theta (2D) or sincos (3D)')
 parser.add_argument('--initial_conditions', type=float, nargs='+', required=True, help='Initial conditions [theta, omega, ...]')
 parser.add_argument('--duration', type=float, default=10.0, help='Simulation duration')
 parser.add_argument('--step', type=float, default=0.01, help='Step')
@@ -59,16 +42,20 @@ params = {
     "m": 1.0     # mass (kg)
 }
 
-input_dim = get_input_dim(args.format)
-
-model = build_model(args.model, input_dim)
+model = build_model(args.model)
 ckpt = torch.load(args.checkpoint, map_location="cpu")
 model.load_state_dict(ckpt)
 model.eval()
 
+if args.model in ["lnn","hnn"]: 
+    format = "sincos" 
+else: 
+    format = "theta"
+    
 T = args.duration
 dt = args.step
 x0 = args.initial_conditions
+
 
 t = np.arange(start=0, stop = T + dt, step = dt)
 
@@ -76,7 +63,7 @@ t = np.arange(start=0, stop = T + dt, step = dt)
 # Trajectories
 #--------------
 
-model_trajectory = simulate(model, x0, dt, T, format=args.format)
+model_trajectory = simulate(model, x0, dt, T, format=format)
 
 true_trajectory = trajectory_simulation(x0, zero_control, dt, T, params=params)
 
