@@ -60,6 +60,15 @@ This project highlights that physics informed models are not only a predictive t
 - Enforcing physical consistency
 - preserving the dynamical structure over a long period of time
 
+## Reproducibility
+Train a model:
+python train.py --model hnn --epochs 1000
+
+Simulate trajectories:
+python simulate.py --model hnn --checkpoint checkpoints/hnn.pth \
+                   --initial_conditions 1.0 0.0 \
+                   --duration 10.0
+
 ## Perspectives
 Future extensions include:
 - chaotic system
