@@ -23,6 +23,7 @@ def build_model(model_name):
 parser = argparse.ArgumentParser()
 parser.add_argument('--model', type=str, required=True, help='Model type: mlp, hnn, or lnn')
 parser.add_argument('--epochs', type=int, default=250, help='Number of training epochs')  
+parser.add_argument('--lr', type=float, default=1e-3, help='Learning rate')
 args = parser.parse_args()
 
 #---------
@@ -30,7 +31,7 @@ args = parser.parse_args()
 #---------
 
 model = build_model(args.model)
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
 loss_fn = nn.MSELoss()
 
 #----------------
@@ -93,6 +94,8 @@ checkpoint_path = checkpoint_dir / f"{args.model}.pth"
 torch.save({
     "model": args.model,          
     "state_dict": model.state_dict(),
+    "epochs": args.epochs,
+    "lr": args.lr
     }, checkpoint_path)
 
 print(f"Model saved to {checkpoint_path}")
