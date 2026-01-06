@@ -18,8 +18,11 @@ def load_pendulum(model_type="hnn"):
         dx_test = np.stack([data_test["d_theta"], data_test["d_omega"]], axis=1)
 
     elif model_type in ["mlp", "vector_field"]:
-        X = np.stack([data_train["theta"], data_train["omega"]], axis=1)
-        dx = np.stack([data_train["d_theta"], data_train["d_omega"]], axis=1)
+        X_train = np.stack([data_train["theta"], data_train["omega"]], axis=1)
+        dx_train = np.stack([data_train["d_theta"], data_train["d_omega"]], axis=1)
+
+        X_test = np.stack([data_test["theta"], data_test["omega"]], axis=1)
+        dx_test = np.stack([data_test["d_theta"], data_test["d_omega"]], axis=1)
 
     else:
         raise ValueError("Unknown model_type")
