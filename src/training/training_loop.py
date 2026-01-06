@@ -79,8 +79,9 @@ for epoch in range(n_epochs):
       test_loss += loss.item()
 
   test_loss /= len(test_loader)
-  print(f"Epoch {epoch+1}/{n_epochs}, Train Loss: {train_loss:.4f}, Test Loss: {test_loss:.4f}")
-
+  if epoch % 10 == 0:
+      print(f"Epoch {epoch+1}/{n_epochs}, Train Loss: {train_loss:.5f}, Test Loss: {test_loss:.5f}")
+      
 #-------------
 # Save model
 #-------------
