@@ -4,9 +4,9 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from src.models.mlp import MLP
-from src.models.hnn import HNN
-from src.models.lnn import LNN
+from src.models.mlp import *
+from src.models.hnn import *
+from src.models.lnn import *
 from src.physics.model_simulation import *
 from src.physics.true_simulation import *
 
