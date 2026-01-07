@@ -7,4 +7,5 @@ In this experiment, the MLP learns to predict the state derivatives (d_theta, d_
 
 #### Phase portrait
 - The learned phase portrait clearly shows a spiral-like pattern converging toward a single attractor at (0,0), which indicating artificial energy dissipation. This behavior arises from the lack of physical constraints such as energy conservation in the MLP architecture. As a result, despite achieving a low local prediction error, the learned dynamics fail to reproduce the correct long-term qualitative behavior of the system.
+
 ![Vector field of the MLP](figures/vector_mlp.png)
