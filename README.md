@@ -16,7 +16,7 @@ The dynamics can be written as:
 Note: the sign convention corresponds to θ measured from the upright equilibrium.
 
 The Hamiltonian of the system is given by:  
-- H(θ,ω) = (1/2) * ​ω2 + (g/l) * (1 − cosθ)
+- H(θ,ω) = (1/2) * ​ω**2 + m * g * (1 − cosθ)
 
 ## Numerical baseline
 Before any learning stage, references trajectories are generated using a fourth order Runge–Kutta (RK4) integration scheme.  
