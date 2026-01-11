@@ -1,7 +1,7 @@
 ## Models
 ### 1st model, State prediction (one-step model)
 In this first experiment, a multilayer perceptron (MLP) directly predicts the next state of the system from the current state and the applied force u. The model learns the following function:
-- x_(t+1) = f_θ (x_t,u_t)
+- x(t+1) = f_θ (x(t),u(t))
 
 This model is purely data-driven and does not impose any physical constraints such as energy conservation. As a consequence, the short-term prediction may be accurate but quickly drifts from the true trajectory after a few seconds due to error accumulation.
 
