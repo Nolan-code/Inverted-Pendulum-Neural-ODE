@@ -1,10 +1,17 @@
 import numpy as np
 import torch
 from torch.utils.data import TensorDataset, DataLoader
+from pathlib import Path
+
+chemin_data = Path(__file__).parent.parent / 'data' / 'mon_fichier.npz'
+data = np.load(chemin_data)
 
 def load_pendulum(model_type="hnn"):
-    data_train = np.load("dataset_train.npz")
-    data_test = np.load("dataset_test.npz")
+    chemin_data_train = Path(__file__).parent.parent / 'data' / 'dataset_train.npz'
+    chemin_data_test = Path(__file__).parent.parent / 'data' / 'dataset_test.npz'
+
+    data_train = np.load(chemin_data_train)
+    data_test = np.load(chemin_data_test)
 
     if model_type in ["hnn","lnn"]:
         theta_train = data_train["theta"]
