@@ -3,10 +3,10 @@ import torch.nn as nn
 import argparse
 from pathlib import Path
 
-from src.data.load_dataset import load_pendulum
-from src.models.mlp_vectorfield import VectorFieldMLP
-from src.models.hnn import HNN
-from src.models.lnn import LNN
+from src.systems.pendulum.data.load_dataset import load_pendulum
+from src.systems.pendulum.models.mlp_vectorfield import VectorFieldMLP
+from src.systems.pendulum.models.hnn import HNN
+from src.systems.pendulum.models.lnn import LNN
 
 MODEL_REGISTRY = {
     "mlp": VectorFieldMLP,
