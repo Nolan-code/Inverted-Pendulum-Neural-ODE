@@ -6,7 +6,7 @@ class MLP(nn.Module):
     super().__init__()
 
     self.net = nn.Sequential(
-        nn.Linear(3,128),
+        nn.Linear(2,128),
         nn.Tanh(),
         nn.Linear(128,128),
         nn.Tanh(),
