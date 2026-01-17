@@ -64,6 +64,10 @@ This project highlights that physics informed models are not only a predictive t
 ## Reproducibility
 Once in the main file:  
 
+python -m venv venv  
+.\venv\Scripts\Activate.ps1  
+pip install torch numpy matplotlib  
+
 Pendulum:  
 Train a model:  
 python -m src.systems.pendulum.training.train.py --model hnn --epochs 300
