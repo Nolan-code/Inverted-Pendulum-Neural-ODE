@@ -62,13 +62,13 @@ This project highlights that physics informed models are not only a predictive t
 - preserving the dynamical structure over a long period of time
 
 ## Reproducibility
+Once in the main file:
+
 Train a model:
-python train.py --model hnn --epochs 1000
+python -m src.systems.pendulum.training.train.py --model hnn --epochs 300
 
 Simulate trajectories:
-python simulate.py --model hnn --checkpoint checkpoints/hnn.pth \
-                   --initial_conditions 1.0 0.0 \
-                   --duration 10.0
+python -m src.systems.pendulum.simulation.simulate.py --model lnn --checkpoint src\systems\pendulum\checkpoints\lnn.pth --initial_conditions 0.5 0.4 --show
 
 ## Perspectives
 Future extensions include:
