@@ -1,3 +1,6 @@
+import torch
+import numpy
+
 def simulate(model, x0, dt, T, format):
     n_steps = int(T / dt)
     traj = []
