@@ -1,3 +1,6 @@
+import torch
+import torch.nn as nn
+
 class MLP_T(nn.Module):
     """Kinetic energy network"""
     def __init__(self):
