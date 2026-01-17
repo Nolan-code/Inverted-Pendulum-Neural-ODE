@@ -97,7 +97,7 @@ for epoch in range(n_epochs):
 # Save model
 #-------------
 
-checkpoint_dir = Path("./src/checkpoints")
+checkpoint_dir = Path("./src/systems/pendulum/checkpoints")
 checkpoint_dir.mkdir(parents=True, exist_ok=True)
 
 checkpoint_path = checkpoint_dir / f"{args.model}.pth"
